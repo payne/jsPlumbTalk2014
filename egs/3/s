@@ -1,0 +1,9 @@
+jsPlumb.draggable(newState, {
+  containment: 'parent'
+});
+ 
+newState.dblclick(function(e) {
+  jsPlumb.detachAllConnections($(this));
+  $(this).remove();
+  e.stopPropagation();
+});

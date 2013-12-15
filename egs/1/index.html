@@ -1,0 +1,39 @@
+<!doctype html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jsPlumb/1.4.1/jquery.jsPlumb-1.4.1-all-min.js"></script>
+<style type="text/css">
+     .draggableClass {
+     float: left;
+     height: 100px;
+     width: 100px;
+     border: 1px solid black;
+     margin: 10px;
+     }
+</style>
+</head>
+<body>
+I like eggs!
+
+   <div id="node0" class="draggableClass"> Node Zero </div>
+   <div id="node1" class="draggableClass"> Node One </div>
+   <div id="node2" class="draggableClass"> Node Two </div>
+   <div id="node3" class="draggableClass"> Node Three </div>
+
+
+<script>
+jsPlumb.ready(function() {
+  // your jsPlumb related init code goes here
+  var e0 = jsPlumb.addEndpoint("node0");
+  var e1 = jsPlumb.addEndpoint("node1");
+  var e2 = jsPlumb.addEndpoint("node2");
+  var e3 = jsPlumb.addEndpoint("node3");
+
+  jsPlumb.draggable($(".draggableClass"));
+  jsPlumb.connect({ source:e0, target:e1 });
+});
+
+</script>
+</body>
+</html>
