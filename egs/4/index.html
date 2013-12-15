@@ -1,0 +1,83 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jsPlumb/1.4.1/jquery.jsPlumb-1.4.1-all-min.js"></script>
+<script>
+jsPlumb.ready(function() {
+  var i = 0;
+  $('#container').dblclick(function(e) {
+    var newState = $('<div>').attr('id', 'state' + i).addClass('item');
+    
+    var title = $('<div>').addClass('title').text('State ' + i);
+    var connect = $('<div>').addClass('connect');
+    
+    newState.css({
+      'top': e.pageY,
+      'left': e.pageX
+    });
+    
+    jsPlumb.makeTarget(newState, {
+      anchor: 'Continuous'
+    });
+    
+    jsPlumb.makeSource(connect, {
+      parent: newState,
+      anchor: 'Continuous'
+    });
+    
+    newState.append(title);
+    newState.append(connect);
+    
+    $('#container').append(newState);
+    
+    i++;    
+
+jsPlumb.draggable(newState, {
+  containment: 'parent'
+});
+ 
+ 
+newState.dblclick(function(e) {
+  jsPlumb.detachAllConnections($(this));
+  $(this).remove();
+  e.stopPropagation();
+});
+  });  
+});
+</script>
+
+    <style type="text/css">
+.title {
+  padding: 10px;
+  cursor: move;
+}
+    
+.connect {
+  width: 100%;
+  height: 20px;
+  background-color: white;
+  cursor: pointer;
+} 
+
+.item {
+  position: absolute;
+  border: 1px solid black;
+  background-color: #ddddff;
+}
+ 
+      #container {
+        border: 1px solid gray;
+        width: 500px;
+        height: 500px;
+      }
+    </style>
+ 
+    <title>Getting started with jsPlumb</title>
+  </head>  
+ 
+  <body>
+  http://blog.emielhollander.nl/getting-started-with-jsplumb-part-2/
+    <div id="container"></div>
+  </body>
+</html>
